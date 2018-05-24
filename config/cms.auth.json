@@ -1,0 +1,34 @@
+{
+  "SECRET_KEY": "testsecretkey",
+  "AWS_ACCESS_KEY_ID": "",
+  "AWS_SECRET_ACCESS_KEY": "",
+  "XQUEUE_INTERFACE": {
+    "basic_auth": ["edx", "edx"],
+    "django_auth": {
+      "username": "lms",
+      "password": "password"
+    },
+    "url": "http://localhost:18040"
+  },
+  "CONTENTSTORE": { 
+    "ENGINE": "xmodule.contentstore.mongo.MongoContentStore",                       
+    "DOC_STORE_CONFIG": {                                                           
+      "db": "openedx",
+      "host": "localhost"
+    } 
+  },  
+  "DOC_STORE_CONFIG": {
+    "db": "openedx",
+    "host": "localhost"  
+  },
+  "DATABASES": {
+    "default": {
+      "ENGINE": "django.db.backends.mysql",
+      "NAME": "openedx",
+      "USER": "openedx",
+      "PASSWORD": "password",
+      "HOST": "localhost",
+      "PORT": "3306"
+    }
+  }
+}
