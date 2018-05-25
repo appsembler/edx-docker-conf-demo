@@ -75,6 +75,29 @@ RUN \
 rm -f /tmp/config
 RUN chmod +x /usr/local/bin/mysql_start.sh
 
+# Orion
+RUN BUILD_ONLY=true npm install --production --unsafe-perm -g orion
+
+# Gotty
+RUN mkdir /gotty \
+ && cd /gotty \
+ && curl -LO https://github.com/yudai/gotty/releases/download/v2.0.0-alpha.3/gotty_2.0.0-alpha.3_linux_amd64.tar.gz \
+ && tar -xzf gotty_2.0.0-alpha.3_linux_amd64.tar.gz \ 
+ && rm gotty_2.0.0-alpha.3_linux_amd64.tar.gz \
+&& rm -rf /tmp/*
+
+# nginx
+RUN mkdir -p /run/nginx \
+ && rm /etc/nginx/conf.d/default.conf \
+ && sed -i 's:/var/log/nginx/error.log warn:stderr notice:g' /etc/nginx/nginx.conf \
+# && sed -i 's:/var/log/nginx/access.log:/dev/stdout:g' /etc/nginx/nginx.conf \
+ && echo 'PS1="\w# "' >> /root/.bashrc \
+ && echo 'alias ll="ls -l"' >> /root/.bashrc \
+ && echo 'alias la="ls -la"' >> /root/.bashrc
+COPY supervisord.conf /etc/
+COPY nginx-orion-gotty.conf /etc/nginx/conf.d/
+COPY entry.html /var/lib/nginx/html/
+COPY gotty /etc/
 # COPY --from=mysql /var/lib/mysql /var/lib/mysql
 # RUN chown -R root:root /var/lib/mysql /var/run/mysqld && chmod -R 777 /var/lib/mysql /var/run/mysqld
 
