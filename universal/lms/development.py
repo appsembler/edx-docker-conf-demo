@@ -9,6 +9,15 @@ MEDIA_ROOT = "/openedx/data/uploads/"
 # Deactivate forums
 FEATURES['ENABLE_DISCUSSION_SERVICE'] = False
 
+FEATURES.update({
+    'AUTOMATIC_AUTH_FOR_TESTING': False,
+    'ENABLE_COURSEWARE_SEARCH': False,
+    'ENABLE_COURSE_DISCOVERY': False,
+    'ENABLE_DASHBOARD_SEARCH': False,
+    'ENABLE_DISCUSSION_SERVICE': False,
+    'SHOW_HEADER_LANGUAGE_SELECTOR': False
+})
+
 # Activate dev_env for logging, otherwise rsyslog is required (but it is
 # not available in docker).
 LOGGING = get_logger_config(LOG_DIR,
