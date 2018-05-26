@@ -18,6 +18,8 @@ FEATURES.update({
     'SHOW_HEADER_LANGUAGE_SELECTOR': False
 })
 
+SEARCH_ENGINE = "search.tests.mock_search_engine.MockSearchEngine"
+
 # Activate dev_env for logging, otherwise rsyslog is required (but it is
 # not available in docker).
 LOGGING = get_logger_config(LOG_DIR,
