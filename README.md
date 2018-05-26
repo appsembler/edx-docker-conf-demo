@@ -88,3 +88,18 @@ Similarly, to start the CMS (Studio), you would type:
 $ supervisorctl start cms
 ```
 
+# Create a superuser
+
+Before you can login to the system and do anything interesting, you'll need to create a superuser.
+
+```
+$ cd /openedx/edx-platform
+$ ./manage.py lms createsuperuser
+...
+Username (leave blank to use 'root'): staff
+Email address: staff@example.com
+Password:
+Password (again):
+Superuser created successfully.
+$
+```
