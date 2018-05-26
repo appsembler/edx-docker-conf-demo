@@ -9,7 +9,7 @@ RUN apt install -y language-pack-en git python-virtualenv build-essential softwa
   # openedx requirements
 RUN apt install -y gettext gfortran graphviz graphviz-dev libffi-dev libfreetype6-dev libgeos-dev libjpeg8-dev liblapack-dev libpng12-dev libxml2-dev libxmlsec1-dev libxslt1-dev nodejs npm ntp pkg-config
   # Our requirements
-RUN DEBIAN_FRONTEND=noninteractive apt install -y -q mysql-client mysql-server mongodb-server supervisor
+RUN DEBIAN_FRONTEND=noninteractive apt install -y -q mysql-client mysql-server mongodb-server supervisor memcached
 # mysql-server=5.7.22-0ubuntu0.16.04.1
 # Install symlink so that we have access to 'node' binary without virtualenv.
 # This replaces the "nodeenv" install.
@@ -114,7 +114,7 @@ RUN \
   bash /tmp/config && \
   rm -f /tmp/config
 
-# Entrypoint will fix permissiosn of all files and run commands as openedx
+# Entrypoint will fix permissions of all files and run commands as openedx
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Run server
