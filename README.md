@@ -103,3 +103,52 @@ Password (again):
 Superuser created successfully.
 $
 ```
+
+# Change the platform name
+
+Edit the `lms.env.json` file and change this line:
+
+```
+  "PLATFORM_NAME": "Open edX 2018 demo",
+```
+
+To:
+
+
+```
+  "PLATFORM_NAME": "Poutine in Montreal",
+```
+
+Now restart the LMS to see your change.
+
+
+# Activate an alternative theme
+
+Rather than using the default theme, you might want to try one of the other themes that ship with Open edX. You can find these in the `/themes` directory.
+
+```
+$ cd /openedx/edx-platform/themes
+$ ls
+README.rst  conf  edge.edx.org  edx.org  red-theme  stanford-style
+```
+
+Let's activate the `red-theme` to get a completely new look.
+
+Edit the `lms.env.json` file and add the following lines:
+
+```
+{
+...
+  "ENABLE_COMPREHENSIVE_THEMING": true,
+  "COMPREHENSIVE_THEME_DIRS": ["/openedx/edx-platform/themes"],
+  "DEFAULT_SITE_THEME": "red-theme",
+...
+}
+```
+
+If you restart the LMS and look at the site, it won't look quite right. 
+That's because we still need to compile the theme assets with this command:
+
+```
+$ paver update_assets lms --settings=universal.development
+```
