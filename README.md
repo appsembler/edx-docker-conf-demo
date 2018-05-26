@@ -67,7 +67,14 @@ In the bottom half of the screen, you should see the Gotty terminal also with `/
 Supervisor is used to start/stop the services running inside the container. If you run `supervisorctl` you'll see that the LMS and CMS services are stopped by default.
 
 ```
-supervisorctl output
+$ supervisorctl status
+cms                              STOPPED   May 26 07:57 AM
+gotty                            RUNNING   pid 16, uptime 1:57:04
+lms                              STOPPED   May 26 06:34 AM
+mongo                            RUNNING   pid 11, uptime 1:57:04
+mysql                            RUNNING   pid 12, uptime 1:57:04
+nginx                            RUNNING   pid 13, uptime 1:57:04
+orion                            RUNNING   pid 14, uptime 1:57:04
 ```
 
 If you want to start the LMS and CMS services, you can use this commenad:
@@ -86,6 +93,20 @@ Similarly, to start the CMS (Studio), you would type:
 
 ```
 $ supervisorctl start cms
+```
+
+If you want to watch the log files, you can start these services with the `manage.py` command:
+
+So to start the LMS, you would type:
+
+```
+$ ./manage.py lms runserver 0.0.0.0:8000
+```
+
+Similarly, to start the CMS (Studio), you would type:
+
+```
+$ ./manage.py cms runserver 0.0.0.0:8001
 ```
 
 # Create a superuser
@@ -151,4 +172,6 @@ That's because we still need to compile the theme assets with this command:
 
 ```
 $ paver update_assets lms --settings=universal.development
+...
+Finished collecting lms assets.
 ```
